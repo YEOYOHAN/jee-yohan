@@ -17,7 +17,7 @@
 </div>
 <script>
 $('#account_form').submit(function(){
-	alert('당신의 돈은 감사히 먹겠습니다.!!!');
+	alert('당신의 돈은 텍스트로 대체되었다 고마워하십시오 휴먼!!!');
 });
 </script>
 </body>

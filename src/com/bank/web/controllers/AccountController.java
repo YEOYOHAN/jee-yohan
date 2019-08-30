@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bank.web.domains.AccountBean;
 import com.bank.web.services.AccountService;
-import com.bank.web.servicesmpls.AccountServiceImpl;
+import com.bank.web.servicesImpls.AccountServiceImpl;
 
 @WebServlet("/account.do")
 public class AccountController extends HttpServlet {

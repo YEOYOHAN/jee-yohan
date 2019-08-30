@@ -1,4 +1,4 @@
-package com.bank.web.servicesmpls;
+package com.bank.web.servicesImpls;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
