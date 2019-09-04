@@ -12,25 +12,25 @@ import com.bank.web.services.AccountService;
 public class AccountServiceImpl implements AccountService{
 	
 	private List<AccountBean> acc;
+
 	public AccountServiceImpl() {
 		acc = new ArrayList<>();
 	}
-	
+
 	public void createAccount(int money) {
 		AccountBean account = new AccountBean();
 		account.setMoney(String.valueOf(money));
 		account.setAccountNum(createAccountNum());
 		account.setToday(findDate());
 		acc.add(account);
-		System.out.println(account);
-		
+
 	}
 
 	public String createAccountNum() {
 		String accNum = "";
 		Random ran = new Random();
-		for(int i=0;i<9;i++) {
-			accNum += (i==4)?"-":ran.nextInt(10);
+		for (int i = 0; i < 9; i++) {
+			accNum += (i == 4) ? "-" : ran.nextInt(10);
 		}
 		return accNum;
 	}
@@ -42,8 +42,8 @@ public class AccountServiceImpl implements AccountService{
 	@Override
 	public AccountBean findByAccountNum(String accountNum) {
 		AccountBean a = new AccountBean();
-		for(AccountBean c : acc) {
-			if(accountNum.equals(c.getAccountNum())) {
+		for (AccountBean c : acc) {
+			if (accountNum.equals(c.getAccountNum())) {
 				a = c;
 				break;
 			}
@@ -65,26 +65,28 @@ public class AccountServiceImpl implements AccountService{
 	}
 
 	public void depositMoney(AccountBean param) {
-	    int money = 0;
-        for(AccountBean ac : acc) {
-            if(ac.getAccountNum().equals(param.getMoney())) {
-                money = Integer.parseInt(ac.getMoney()) + Integer.parseInt(param.getMoney());
-                
-                ac.setMoney(String.valueOf(money));
-                ac.setToday(findDate());
-                
-                acc.add(acc.indexOf(ac), ac);
-            }
-        }
-    }
+		int money = 0;
+		for (AccountBean ac : acc) {
+			if (ac.getAccountNum().equals(param.getMoney())) {
+				money = Integer.parseInt(ac.getMoney()) + Integer.parseInt(param.getMoney());
+
+				ac.setMoney(String.valueOf(money));
+				ac.setToday(findDate());
+
+				acc.add(acc.indexOf(ac), ac);
+			}
+		}
+	}
+
 	public void withdrawMoney(AccountBean param) {
-		if(existAccountNum(param.getAccountNum()));
+		if (existAccountNum(param.getAccountNum()))
+			;
 		int withdrawal = Integer.parseInt(param.getMoney());
 		int index = acc.indexOf(param);
 		int saving = Integer.parseInt(acc.get(index).getMoney());
-		String rr = String.valueOf(saving-withdrawal);
+		String rr = String.valueOf(saving - withdrawal);
 		acc.get(index).setMoney(rr);
-		
+
 	}
 
 	public boolean deleteAccountNum(String accountNum) {
