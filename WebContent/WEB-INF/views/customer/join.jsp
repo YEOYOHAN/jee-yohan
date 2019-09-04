@@ -25,7 +25,6 @@
 <script>
 $('#join_form').submit(function(){
 	alert('테스트 맥락!!!');
-	location.assign('<%=request.getContextPath() %>/member.do?action=join&dest=login');
 });
 </script>
 </body>
