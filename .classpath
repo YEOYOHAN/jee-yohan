@@ -13,5 +13,7 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="C:/Users/user/eclipse-jee/jee-yohan/WebContent/WEB-INF/lib/jstl.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/user/eclipse-jee/jee-yohan/WebContent/WEB-INF/lib/standard.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

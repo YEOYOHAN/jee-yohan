@@ -10,10 +10,10 @@
 <body>
 <div>
 	<h2>회원가입</h2>
-	<img src="http://www.weeklytoday.com/news/photo/201901/73545_78619_1629.jpg" width="300" height="300" alt="신한" />
+	<img src="http://www.weeklytoday.com/news/photo/201901/73545_78619_1629.jpg" width="600" height="300" alt="신한" />
 	<form id="join_form" action="<%=request.getContextPath()%>/member.do">
 		아이디<input type="text" name="id" /><br/>
-		비밀번호<input type="text" name="pw" /><br/>
+		비밀번호<input type="password" name="pw" /><br/>
 		주민번호<input type="text" name="ssn" /><br/>
 		이름<input type="text" name="name" /><br/>
 		신용도<input type="text" name="credit" /><br/>

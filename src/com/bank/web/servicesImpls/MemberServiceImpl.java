@@ -3,13 +3,91 @@ package com.bank.web.servicesImpls;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bank.web.daoImpls.MemberDAOImpl;
+import com.bank.web.daos.MemberDAO;
 import com.bank.web.domains.CustomerBean;
 import com.bank.web.domains.EmployeeBean;
 import com.bank.web.domains.MemberBean;
 import com.bank.web.services.MemberService;
 
 public class MemberServiceImpl implements MemberService{
-	private List<CustomerBean> customers;
+	public MemberDAO dao;
+	public MemberServiceImpl() {
+		dao = new MemberDAOImpl();
+	}
+	@Override
+	public void join(CustomerBean param) {
+		dao.insertCustomer(param);
+		
+	}
+
+	@Override
+	public void register(EmployeeBean param) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<CustomerBean> findAllCustomers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<EmployeeBean> findAllEmployees() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<MemberBean> findByName(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public MemberBean findById(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CustomerBean login(CustomerBean param) {
+		CustomerBean bean = new CustomerBean();
+		bean = dao.login(param);
+		return bean;
+	}
+
+	@Override
+	public int countCustomers() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int countEmployees() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean existId(String id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void updatePass(MemberBean param) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean deleteMember(MemberBean param) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	/*private List<CustomerBean> customers;
 	private List<EmployeeBean> employees;
 	
 	public MemberServiceImpl() {
@@ -140,5 +218,5 @@ public class MemberServiceImpl implements MemberService{
 					? employees.remove(m)
 							:customers.remove(m);
 		
-	}
+	}*/
 }
