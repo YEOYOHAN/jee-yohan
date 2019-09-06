@@ -16,7 +16,7 @@ public class MemberDAOImpl implements MemberDAO{
 	@Override
 	public void insertCustomer(CustomerBean param) {
 		try {
-			File file = new File(Constants.FILE_PATH+"5678.txt");
+			File file = new File(Constants.FILE_PATH+"customer.txt");
 			BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
 			writer.write(String.format("%s,%s,%s,%s,%s", param.getId(),param.getName(),param.getPw(),param.getSsn(),param.getCredit()));
 			writer.newLine();
@@ -40,7 +40,7 @@ public class MemberDAOImpl implements MemberDAO{
 	@Override
 	public CustomerBean login(CustomerBean param) {
 		try {
-			File file = new File(Constants.FILE_PATH+"5678.txt");
+			File file = new File(Constants.FILE_PATH+"customer.txt");
 			BufferedReader reader = new BufferedReader(new FileReader(file));
 			String pNum = reader.readLine();
 			String[] spl = pNum.split(",");
@@ -49,7 +49,6 @@ public class MemberDAOImpl implements MemberDAO{
 			param.setPw(spl[2]);
 			param.setSsn(spl[3]);
 			param.setCredit(spl[4]);
-			System.out.println(spl[0]);
 			reader.close();
 		} catch (Exception e) {
 		}

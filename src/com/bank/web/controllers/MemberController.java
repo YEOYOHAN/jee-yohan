@@ -1,39 +1,31 @@
 package com.bank.web.controllers;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import com.bank.web.command.Sender;
+import com.bank.web.command.Receiver;
 import com.bank.web.domains.CustomerBean;
-import com.bank.web.pool.Constants;
 import com.bank.web.services.MemberService;
 import com.bank.web.servicesImpls.MemberServiceImpl;
 
 
-@WebServlet("/member.do")
+@WebServlet("/customer.do")
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String FILE_PATH = null;
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		MemberService service = new MemberServiceImpl();
 		CustomerBean param = new CustomerBean();
-		
-		switch (request.getParameter("action")) {
-		case "move":
-			request.getRequestDispatcher(String.format(Constants.VIEW_PATH, 
-					"customer", request.getParameter("dest")))
-					.forward(request, response);
-			break;
+		MemberService service = new MemberServiceImpl();
+		Receiver.init(request);
+		Receiver.cmd.execute();
+		if(Receiver.cmd.getAction()==null) {
+			Receiver.cmd.setPage();
+		}
+		switch (Receiver.cmd.getAction()) {
 		case "join":
 			String id = request.getParameter("id");
 			String pw = request.getParameter("pw");
@@ -47,36 +39,31 @@ public class MemberController extends HttpServlet {
 			param.setSsn(ssn);
 			service = new MemberServiceImpl();
 			service.join(param);
-			request.getRequestDispatcher(String.format(Constants.VIEW_PATH, 
-					"customer", request.getParameter("dest")))
-					.forward(request, response);
 			System.out.println(param.toString());
+			Receiver.cmd.setPage("login");
 			break;
 		case "login":
-			CustomerBean pp = new CustomerBean();
+			CustomerBean cust = new CustomerBean();
 			id = request.getParameter("id");
 			pw = request.getParameter("pw");
 			param.setId(id);
 			param.setPw(pw);
-			pp = service.login(param);
-			if(id.equals(pp.getId())&&pw.equals(pp.getPw())) {
-				request.setAttribute("customer", pp);
-				request.getRequestDispatcher(String.format(Constants.VIEW_PATH, 
-						"customer", request.getParameter("dest")))
-						.forward(request, response);
+			cust = service.login(param);
+			if(cust == null) {
+				
+				Receiver.cmd.setPage("login");
 			}else {
-				request.getRequestDispatcher(String.format(Constants.VIEW_PATH, 
-						"customer", request.getParameter("action")))
-						.forward(request, response);
+				Receiver.cmd.setPage("mypage");
 			}
+			request.setAttribute("customer", cust);
 			break;
 		case "existID":
 			break;
 		case "mypage":
 			break;
 		}
+		Sender.forward(request, response);
 	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
