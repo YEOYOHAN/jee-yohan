@@ -25,4 +25,7 @@ public class Command implements Order{
 	public void setPage() {
 		page = request.getParameter("page");
 	}
+	public void setView(String domain, String page) {
+		this.view = String.format(Constants.VIEW_PATH, domain, page);
+	}
 }

@@ -1,6 +1,5 @@
 package com.bank.web.servicesImpls;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.bank.web.daoImpls.MemberDAOImpl;

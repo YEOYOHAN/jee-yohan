@@ -39,20 +39,26 @@ public class MemberDAOImpl implements MemberDAO{
 
 	@Override
 	public CustomerBean login(CustomerBean param) {
+			CustomerBean cc = new CustomerBean();
 		try {
 			File file = new File(Constants.FILE_PATH+"customer.txt");
 			BufferedReader reader = new BufferedReader(new FileReader(file));
 			String pNum = reader.readLine();
 			String[] spl = pNum.split(",");
-			param.setId(spl[0]);
-			param.setName(spl[1]);
-			param.setPw(spl[2]);
-			param.setSsn(spl[3]);
-			param.setCredit(spl[4]);
+			cc.setId(spl[0]);
+			cc.setName(spl[1]);
+			cc.setPw(spl[2]);
+			cc.setSsn(spl[3]);
+			cc.setCredit(spl[4]);
+			if(param.getId().equals(cc.getId())&&param.getPw().equals(cc.getPw())) {
+				cc = param;
+			}else {
+				cc = null;
+			}
 			reader.close();
 		} catch (Exception e) {
 		}
-		return param;
+		return cc;
 		
 		
 	}
